@@ -75,17 +75,16 @@ export function Hero() {
               className="font-serif text-[3.2rem] leading-[0.98] tracking-tight sm:text-[4.2rem] md:text-[5.2rem]"
               style={stagger(2)}
             >
-              Cuidado con
+              Corte limpio,
               <br />
-              <span className="italic text-brass">oficio</span>, sin prisa.
+              <span className="italic text-brass">estilo propio</span>.
             </h1>
 
             <p
               className="mt-6 max-w-md text-base leading-relaxed text-muted-foreground md:text-lg"
               style={stagger(3)}
             >
-              Barbería en el corazón de Sant Martí, Barcelona. Cortes,
-              barbas y afeitados con la atención de siempre.
+              Barbería en el corazón de Sant Martí, Barcelona. Fades, barba y el detalle que se nota.
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-4" style={stagger(4)}>
