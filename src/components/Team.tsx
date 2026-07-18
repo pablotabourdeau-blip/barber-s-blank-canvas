@@ -38,7 +38,7 @@ export function Team() {
             </div>
 
             <h2 className="font-serif text-4xl leading-[1.02] md:text-5xl lg:text-6xl">
-              Manos con oficio
+              Detrás de cada corte
             </h2>
 
             <p className="max-w-md text-base leading-relaxed text-muted-foreground md:text-lg">

@@ -10,7 +10,7 @@ const highlights = [
   },
   {
     icon: Scissors,
-    label: "Barberos con oficio",
+    label: "El equipo",
     description: "Ramiro, Alejandro, Carlos y Lautaro — años de experiencia en cada corte.",
   },
   {
@@ -68,10 +68,7 @@ export function About() {
             </h2>
 
             <p className="max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
-              En Zappra combinamos técnicas de barbería clásica con un trato
-              cercano y sin postureo. En el corazón de Sant Martí, Barcelona,
-              cada cita es una experiencia de grooming pensada para que
-              salgas impecable.
+              Cada corte, pensado para ti. Buen trato, buena técnica, sin fórmulas genéricas. En el corazón de Sant Martí, Barcelona.
             </p>
 
             <div className="grid gap-6 sm:grid-cols-3">
