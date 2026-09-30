@@ -1,93 +1,33 @@
-import { Star } from "lucide-react";
-
-const reviews = [
-  {
-    text: "El mejor servicio de barbería, siempre la mejor opción.",
-    author: "Laura",
-  },
-  {
-    text: "Trato profesional y resultado impecable como de costumbre.",
-    author: "Joel",
-  },
-  {
-    text: "Me dejaron el pelo exactamente como quería. 100% recomiendo.",
-    author: "Luca",
-  },
-];
-
-function StarRating() {
-  return (
-    <div className="flex gap-1" aria-label="5 estrellas de 5">
-      {Array.from({ length: 5 }).map((_, i) => (
-        <Star
-          key={i}
-          className="h-4 w-4 fill-brass text-brass"
-          strokeWidth={0}
-          aria-hidden
-        />
-      ))}
-    </div>
-  );
-}
-
-function ReviewCard({ text, author }: { text: string; author: string }) {
-  return (
-    <article className="card-glass flex flex-col gap-5 p-8">
-      <StarRating />
-      <p className="text-base leading-relaxed text-ink/80">&ldquo;{text}&rdquo;</p>
-      <div className="mt-auto flex items-center gap-3">
-        <span className="flex h-9 w-9 items-center justify-center border border-ink/12 font-serif text-sm">
-          {author.charAt(0)}
-        </span>
-        <span className="text-sm font-medium tracking-wide">{author}</span>
-      </div>
-    </article>
-  );
-}
+import { ArrowUpRight } from "lucide-react";
+import { BUSINESS, REVIEWS } from "@/lib/business";
 
 export function Reviews() {
+  const href =
+    BUSINESS.googleReviewsUrl ??
+    `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`Barberia JUS ${BUSINESS.address} Barcelona`)}`;
+
   return (
-    <section
-      id="resenas"
-      className="relative overflow-hidden bg-marble-light py-24 md:py-32 lg:py-40"
-    >
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-ink/10 to-transparent" />
-
-      <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        {/* Header */}
-        <div className="mb-16 flex flex-col items-start gap-8 md:mb-20 md:flex-row md:items-end md:justify-between">
-          <div className="max-w-2xl animate-fade-up">
-            <div className="mb-6 flex items-center gap-4">
-              <span className="hairline max-w-[80px]" />
-              <span className="label-luxury">Opiniones</span>
-            </div>
-            <h2 className="font-serif text-4xl leading-[1.02] md:text-5xl lg:text-6xl">
-              Lo que dicen nuestros clientes
-            </h2>
-          </div>
-
-          {/* Booksy badge */}
-          <div className="animate-fade-up flex items-center gap-3 border border-ink/12 bg-card px-5 py-3">
-            <div className="flex flex-col leading-none">
-              <span className="font-serif text-2xl">4.9</span>
-            </div>
-            <div className="h-8 w-px bg-ink/12" aria-hidden />
-            <div className="flex flex-col">
-              <span className="flex items-center gap-1 text-sm font-medium">
-                <Star className="h-3.5 w-3.5 fill-brass text-brass" strokeWidth={0} />
-                en Booksy
-              </span>
-              <span className="text-xs text-muted-foreground">474 reseñas verificadas</span>
-            </div>
-          </div>
+    <section id="resenas" className="scroll-mt-20 bg-cream py-24 lg:py-32">
+      <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12">
+        <div className="flex flex-col justify-between gap-8 border-y border-ink/15 py-14 lg:flex-row lg:items-center">
+          <h2 className="animate-fade-up text-4xl leading-[1.05] sm:text-5xl">
+            Lo que dicen <em className="italic text-wood">nuestros clientes.</em>
+          </h2>
+          <a href={href} target="_blank" rel="noopener noreferrer" className="btn btn-ghost animate-fade-up self-start lg:self-auto">
+            Ver todas las reseñas <ArrowUpRight className="h-4 w-4" strokeWidth={1.5} />
+          </a>
         </div>
 
-        {/* Reviews grid */}
-        <div className="grid gap-6 md:grid-cols-3 animate-fade-up">
-          {reviews.map((review) => (
-            <ReviewCard key={review.author} {...review} />
-          ))}
-        </div>
+        {REVIEWS.length > 0 && (
+          <ul className="mt-12 grid gap-10 md:grid-cols-3">
+            {REVIEWS.map((r) => (
+              <li key={r.author + r.text.slice(0, 12)} className="animate-fade-up">
+                <blockquote className="font-display text-2xl italic leading-snug">“{r.text}”</blockquote>
+                <p className="eyebrow mt-5 !text-[0.6rem] text-stone">{r.author}</p>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </section>
   );
