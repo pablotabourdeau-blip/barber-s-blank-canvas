@@ -1,103 +1,53 @@
-import {
-  Scissors,
-  ScissorsLineDashed,
-  Brush,
-  Sparkles,
-  ScanEye,
-  ArrowRight,
-} from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
+import { BOOKING_HREF, BOOKING_IS_EXTERNAL, SERVICES } from "@/lib/business";
 
-const BOOKSY_URL =
-  "https://booksy.com/es-es/77361_barberia-zappra_barberia_48863_barcelona";
-
-const services = [
-  { icon: Scissors, title: "Corte de pelo", price: "15€", duration: "30 min" },
-  { icon: ScanEye, title: "Corte + cejas", price: "18€", duration: "30 min" },
-  { icon: ScissorsLineDashed, title: "Corte + barba", price: "25€", duration: "45 min" },
-  { icon: Brush, title: "Arreglo de barba", price: "10€", duration: "20 min" },
-  { icon: Sparkles, title: "Ritual de barba", price: "15€", duration: "30 min" },
-  { icon: ScissorsLineDashed, title: "Corte + ritual de barba", price: "30€", duration: "1h" },
-];
-
-function ServiceCard({
-  icon: Icon,
-  title,
-  price,
-  duration,
-}: {
-  icon: React.ElementType;
-  title: string;
-  price: string;
-  duration: string;
-}) {
-  return (
-    <div className="card-glass group relative flex flex-col justify-between p-8">
-      <div className="mb-10 flex items-start justify-between">
-        <div className="flex h-12 w-12 items-center justify-center border border-ink/12">
-          <Icon className="h-6 w-6 text-brass" strokeWidth={1.25} />
-        </div>
-        <div className="text-right">
-          <span className="font-serif text-3xl">{price}</span>
-          <div className="text-xs uppercase tracking-wider text-muted-foreground">
-            {duration}
-          </div>
-        </div>
-      </div>
-      <h3 className="font-serif text-xl leading-tight">{title}</h3>
-    </div>
-  );
-}
+const ext = BOOKING_IS_EXTERNAL ? { target: "_blank", rel: "noopener noreferrer" } : {};
 
 export function Services() {
   return (
-    <section
-      id="servicios"
-      className="relative overflow-hidden bg-background py-24 md:py-32 lg:py-40"
-    >
-      <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        {/* Header */}
-        <div className="mb-16 flex flex-col items-start gap-8 md:mb-20 md:flex-row md:items-end md:justify-between">
-          <div className="max-w-2xl animate-fade-up">
-            <div className="mb-6 flex items-center gap-4">
-              <span className="hairline max-w-[80px]" />
-              <span className="label-luxury">Servicios</span>
-            </div>
-            <h2 className="font-serif text-4xl leading-[1.02] md:text-5xl lg:text-6xl">
-              Cuidado a la altura de tu estilo
+    <section id="servicios" className="scroll-mt-20 bg-ink py-24 text-cream lg:py-36">
+      <div className="mx-auto grid max-w-[1400px] gap-16 px-5 sm:px-8 lg:grid-cols-12 lg:px-12">
+        <div className="lg:col-span-4">
+          <div className="lg:sticky lg:top-32">
+            <p className="eyebrow animate-fade-up text-cream/50">Servicios</p>
+            <h2 className="animate-fade-up mt-6 text-5xl leading-[1.02] sm:text-6xl">
+              El clásico.
+              <br />
+              Lo actual.
+              <br />
+              <em className="italic text-cream/60">Lo que te queda bien.</em>
             </h2>
+            <p className="animate-fade-up mt-8 max-w-sm text-cream/60">
+              Precios y tiempos, en la barbería o por teléfono. Te asesoramos sobre lo que mejor te va.
+            </p>
           </div>
-          <p className="max-w-sm text-sm leading-relaxed text-muted-foreground md:text-right">
-            Trabajamos con cita previa para cuidar cada detalle. Precios
-            confirmados en Booksy.
-          </p>
         </div>
 
-        {/* Grid */}
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 animate-fade-up">
-          {services.map((service) => (
-            <ServiceCard key={service.title} {...service} />
+        <ol className="border-t border-cream/15 lg:col-span-7 lg:col-start-6">
+          {SERVICES.map((s) => (
+            <li key={s.name} className="animate-fade-up border-b border-cream/15">
+              <a
+                href={BOOKING_HREF}
+                {...ext}
+                className="group grid grid-cols-[auto_1fr_auto] items-baseline gap-x-5 gap-y-2 py-8 transition-colors sm:gap-x-8 lg:py-10"
+                aria-label={`Reservar: ${s.name}`}
+              >
+                <span className="eyebrow !text-[0.6rem] text-cream/40">{s.category}</span>
+                <span className="font-display text-3xl transition-transform duration-500 group-hover:translate-x-2 sm:text-4xl lg:text-5xl">
+                  {s.name}
+                </span>
+                <span className="eyebrow flex items-center gap-2 !text-[0.6rem] text-cream/50 transition-colors group-hover:text-cream">
+                  {s.price ?? "Consultar"}
+                  <ArrowUpRight className="h-4 w-4 transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={1.25} />
+                </span>
+                <span className="col-start-2 col-end-4 max-w-md text-sm leading-relaxed text-cream/60">
+                  {s.description}
+                  {s.duration && <span className="text-cream/40"> · {s.duration}</span>}
+                </span>
+              </a>
+            </li>
           ))}
-        </div>
-
-        {/* Note */}
-        <p className="mt-10 max-w-3xl text-sm text-muted-foreground">
-          Consulta el resto de combinados y tratamientos disponibles en
-          Booksy — la carta completa se confirma con más detalle según lo que
-          nos confirme el cliente.
-        </p>
-
-        {/* CTA */}
-        <div className="mt-16 flex justify-center animate-fade-up">
-          <a
-            href={BOOKSY_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-luxury !py-4 !px-14"
-          >
-            Reservar cita ahora
-            <ArrowRight className="h-4 w-4" />
-          </a>
-        </div>
+        </ol>
       </div>
     </section>
   );

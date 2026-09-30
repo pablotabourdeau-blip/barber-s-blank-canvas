@@ -5,16 +5,16 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * ZAPPRA — Design System
- * Blanco hueso · tinta casi negra · gris cálido · latón apagado (acento único)
- * Editorial, luminoso, minimalista. Serif display + sans body.
+ * BARBERIA JUS — Design system
+ * Carbón · crema marfil · madera oscura · terracota muy sutil.
+ * Editorial, sobrio, cálido. Bodoni Moda display + Manrope texto.
  */
 
 @theme inline {
-  --radius-sm: 2px;
-  --radius-md: 3px;
-  --radius-lg: 4px;
-  --radius-xl: 6px;
+  --radius-sm: 0px;
+  --radius-md: 1px;
+  --radius-lg: 2px;
+  --radius-xl: 3px;
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -35,76 +35,50 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-hairline: var(--hairline);
+
   --color-ink: var(--ink);
-  --color-bone: var(--bone);
-  --color-brass: var(--brass);
+  --color-cream: var(--cream);
   --color-paper: var(--paper);
+  --color-wood: var(--wood);
+  --color-terra: var(--terra);
+  --color-stone: var(--stone);
 
-  /* Back-compat aliases so existing component classes (bg-graphite, text-neon,
-     border-silver, bg-gold...) resolve to the new light palette without
-     touching every file. graphite = dark ink block, neon/gold = brass accent. */
-  --color-graphite: var(--ink);
-  --color-silver: var(--ink);
-  --color-neon: var(--brass);
-  --color-gold: var(--brass);
-
-  /* Display face: Manrope — bold geometric sans, matches the real ZAPPRA
-     signage lettering. Kept behind --font-serif so existing `font-serif`
-     utilities pick it up without touching every component. */
-  --font-serif: "Manrope", "Inter", system-ui, sans-serif;
-  --font-sans: "Inter", system-ui, sans-serif;
-
-  --shadow-subtle: 0 1px 2px 0 rgb(28 27 25 / 0.06);
-  --shadow-soft: 0 20px 50px -24px rgb(28 27 25 / 0.18);
-  --shadow-lift: 0 12px 30px -12px rgb(28 27 25 / 0.14);
-
-  --tracking-luxury: 0.22em;
+  --font-display: "Bodoni Moda", "Didot", Georgia, serif;
+  --font-sans: "Manrope", system-ui, sans-serif;
 }
 
 :root {
-  --background: #FAFAF7;
-  --foreground: #1C1B19;
-  --card: #FFFFFF;
-  --card-foreground: #1C1B19;
-  --popover: #FFFFFF;
-  --popover-foreground: #1C1B19;
-  --primary: #1C1B19;
-  --primary-foreground: #FAFAF7;
-  --secondary: #F1EFEA;
-  --secondary-foreground: #1C1B19;
-  --muted: #F1EFEA;
-  --muted-foreground: #6E6B64;
-  --accent: #EFEAE0;
-  --accent-foreground: #1C1B19;
-  --destructive: oklch(0.55 0.18 27);
-  --destructive-foreground: #FAFAF7;
-  --border: rgb(28 27 25 / 0.10);
-  --input: rgb(28 27 25 / 0.14);
-  --ring: rgb(154 123 79 / 0.5);
-
-  --ink: #1C1B19;
-  --bone: #FAFAF7;
+  --ink: #171614;
+  --cream: #F4F1EA;
   --paper: #FFFFFF;
-  --brass: #D6543F;
-  --hairline: rgb(28 27 25 / 0.14);
-}
+  --wood: #4A3426;
+  --terra: #A4442F;
+  --stone: #8A847A;
 
-.dark {
-  --background: #1C1B19;
-  --foreground: #FAFAF7;
+  --background: var(--cream);
+  --foreground: var(--ink);
+  --card: var(--paper);
+  --card-foreground: var(--ink);
+  --popover: var(--paper);
+  --popover-foreground: var(--ink);
+  --primary: var(--ink);
+  --primary-foreground: var(--cream);
+  --secondary: #EAE5DA;
+  --secondary-foreground: var(--ink);
+  --muted: #EAE5DA;
+  --muted-foreground: #6B655C;
+  --accent: #EAE5DA;
+  --accent-foreground: var(--ink);
+  --destructive: #A4442F;
+  --destructive-foreground: var(--cream);
+  --border: rgb(23 22 20 / 0.12);
+  --input: rgb(23 22 20 / 0.16);
+  --ring: rgb(164 68 47 / 0.5);
 }
 
 @layer base {
-  * {
-    border-color: var(--color-border);
-  }
-
-  html {
-    scroll-behavior: smooth;
-    background-color: #FAFAF7;
-  }
-
+  * { border-color: var(--color-border); }
+  html { scroll-behavior: smooth; background-color: var(--cream); }
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
@@ -112,197 +86,110 @@
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
-
   h1, h2, h3, h4 {
-    font-family: var(--font-serif);
-    font-weight: 700;
+    font-family: var(--font-display);
+    font-weight: 500;
     letter-spacing: -0.02em;
   }
+  ::selection { background: var(--ink); color: var(--cream); }
+  :focus-visible { outline: 1px solid var(--terra); outline-offset: 3px; }
 }
 
-/* Editorial micro-label — small caps tracking, brass */
-@utility label-luxury {
+@utility eyebrow {
   font-family: var(--font-sans);
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: var(--tracking-luxury);
-  color: var(--color-brass);
+  letter-spacing: 0.28em;
 }
 
-/* Hairline separator */
-@utility hairline {
-  height: 1px;
-  width: 100%;
-  background: linear-gradient(
-    to right,
-    transparent,
-    var(--hairline) 20%,
-    var(--hairline) 80%,
-    transparent
-  );
-}
-
-@utility hairline-vertical {
-  width: 1px;
-  height: 100%;
-  background: linear-gradient(
-    to bottom,
-    transparent,
-    var(--hairline) 20%,
-    var(--hairline) 80%,
-    transparent
-  );
-}
-
-/* Paper texture — faint warm grain, replaces old marble/epoxy utilities */
-@utility bg-marble-light {
-  background-color: var(--color-card);
-  background-image:
-    radial-gradient(ellipse at 15% 20%, rgb(154 123 79 / 0.05) 0%, transparent 40%),
-    radial-gradient(ellipse at 85% 75%, rgb(28 27 25 / 0.03) 0%, transparent 45%);
-}
-
-@utility bg-marble-dark {
-  background-color: #1C1B19;
-  background-image:
-    radial-gradient(ellipse at 20% 30%, rgb(250 250 247 / 0.05) 0%, transparent 40%),
-    radial-gradient(ellipse at 75% 65%, rgb(154 123 79 / 0.10) 0%, transparent 45%);
-}
-
-@utility bg-epoxy {
-  background-color: var(--color-card);
-}
-
-/* Signature: single razor-thin "shave line" — draws left to right on reveal */
-@utility shave-line {
+@utility link-underline {
   position: relative;
   &::after {
     content: "";
     position: absolute;
-    left: 0;
-    bottom: -2px;
+    left: 0; right: 0; bottom: -4px;
     height: 1px;
-    width: 0;
-    background: var(--color-brass);
-    transition: width 900ms cubic-bezier(0.22, 1, 0.36, 1) 200ms;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
   }
-  &.in-view::after {
-    width: 100%;
-  }
-}
-
-/* Removed: hex-grid, grain, neon-pulse (too maximalist for this brief) */
-@utility hex-grid {
-  position: relative;
-}
-@utility grain {
-  position: relative;
-}
-
-/* Card — paper white on bone, soft lift on hover, single hairline */
-@utility card-glass {
-  background: var(--color-card);
-  border: 1px solid var(--hairline);
-  transition: border-color 350ms ease, box-shadow 350ms ease, transform 350ms ease;
-  &:hover {
-    border-color: rgb(154 123 79 / 0.4);
-    box-shadow: var(--shadow-lift);
+  &:hover::after, &[aria-current="true"]::after {
+    transform: scaleX(1);
+    transform-origin: left;
   }
 }
 
-/* Primary CTA — ink fill, bone text */
-@utility btn-luxury {
+@utility btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.625rem;
-  padding: 1rem 2rem;
-  font-family: var(--font-sans);
-  font-size: 0.75rem;
-  font-weight: 600;
+  gap: 0.75rem;
+  min-height: 3.25rem;
+  padding: 0 1.75rem;
+  font-size: 0.7rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.2em;
-  border: 1px solid var(--color-ink);
-  background: var(--color-ink);
-  color: var(--color-bone);
-  cursor: pointer;
-  transition: background 300ms ease, color 300ms ease, border-color 300ms ease, transform 300ms ease;
-  &:hover {
-    background: var(--color-brass);
-    border-color: var(--color-brass);
-    transform: translateY(-1px);
-  }
+  letter-spacing: 0.24em;
+  border: 1px solid currentColor;
+  transition: background-color 400ms ease, color 400ms ease, border-color 400ms ease, transform 400ms cubic-bezier(0.22, 1, 0.36, 1);
+  &:active { transform: scale(0.98); }
+  & svg { transition: transform 400ms cubic-bezier(0.22, 1, 0.36, 1); }
+  &:hover svg { transform: translateX(4px); }
 }
 
-/* Secondary CTA — outline, ink on hover */
-@utility btn-luxury-inverse {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.625rem;
-  padding: 1rem 2rem;
-  font-family: var(--font-sans);
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  border: 1px solid var(--hairline);
+/* Solid: ink on light / cream on dark via color vars */
+@utility btn-solid {
+  background: var(--ink);
+  color: var(--cream);
+  border-color: var(--ink);
+  &:hover { background: var(--wood); border-color: var(--wood); }
+}
+@utility btn-solid-light {
+  background: var(--cream);
+  color: var(--ink);
+  border-color: var(--cream);
+  &:hover { background: var(--paper); border-color: var(--paper); }
+}
+@utility btn-ghost {
   background: transparent;
-  color: var(--color-ink);
-  cursor: pointer;
-  transition: background 300ms ease, color 300ms ease, border-color 300ms ease;
-  &:hover {
-    border-color: var(--color-ink);
-    background: var(--color-ink);
-    color: var(--color-bone);
-  }
+  &:hover { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+}
+@utility btn-ghost-light {
+  background: transparent;
+  color: var(--cream);
+  border-color: rgb(244 241 234 / 0.35);
+  &:hover { border-color: var(--cream); background: rgb(244 241 234 / 0.06); }
 }
 
-/* Animations */
-@keyframes fade-up {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-@keyframes fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-@keyframes slow-zoom {
-  from { transform: scale(1.06); }
-  to { transform: scale(1); }
-}
-@keyframes neon-pulse {
-  0%, 100% { opacity: 0.7; }
-  50% { opacity: 1; }
-}
-
+/* Reveal on scroll (ScrollReveal adds .in-view) */
 @utility animate-fade-up {
   opacity: 0;
-  transform: translate3d(0, 22px, 0);
-  transition:
-    opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
-    transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: opacity, transform;
-  &.in-view {
-    opacity: 1;
-    transform: none;
-  }
-}
-@utility animate-fade-in-slow {
-  animation: fade-in 1200ms ease-out both;
-}
-@utility animate-slow-zoom {
-  animation: slow-zoom 9s ease-out both;
-}
-@utility animate-neon-pulse {
-  animation: neon-pulse 3.4s ease-in-out infinite;
+  transform: translate3d(0, 24px, 0);
+  transition: opacity 900ms cubic-bezier(0.22, 1, 0.36, 1), transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+  &.in-view { opacity: 1; transform: none; }
 }
 
-@keyframes scroll-hint {
-  0% { transform: translateY(-100%); }
-  60%, 100% { transform: translateY(1000%); }
+@keyframes rise {
+  from { opacity: 0; transform: translate3d(0, 28px, 0); }
+  to { opacity: 1; transform: none; }
 }
-@utility animate-scroll-hint {
-  animation: scroll-hint 2.2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes settle { from { transform: scale(1.07); } to { transform: scale(1); } }
+@keyframes draw { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+@utility animate-rise { animation: rise 1100ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+@utility animate-fade { animation: fade 1200ms ease-out both; }
+@utility animate-settle { animation: settle 2600ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+@utility animate-draw { transform-origin: left; animation: draw 1400ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 1ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 1ms !important;
+  }
+  .animate-fade-up { opacity: 1; transform: none; }
 }
